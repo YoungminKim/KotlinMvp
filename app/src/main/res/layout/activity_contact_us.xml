@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <include
+        layout="@layout/include_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <LinearLayout
+        android:id="@+id/sub_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/include_titlebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <ScrollView
+            android:id="@+id/parent_sv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="none"
+            android:background="#ffffff">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+
+                <ScrollView
+                    android:id="@+id/child_sv"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/gray2_stroke_box"
+                    android:scrollbars="none"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/agree_txt"
+                        android:textSize="12dp"
+                        android:textColor="@color/app_gray3"/>
+
+                </ScrollView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="개인정보ㆍ이용에 동의합니다."
+                        android:textColor="@color/app_gray3"
+                        android:textSize="12dp"
+                        android:textStyle="normal" />
+
+
+                    <CheckBox
+                        android:id="@+id/provision_cb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:button="@drawable/checkbox_premium_item" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/inquiry_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="24dp"
+                    android:onClick="onClick"
+                    android:background="#383838">
+
+                    <TextView
+                        android:id="@+id/inquiry_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="문의유형을 선택해주세요."
+                        android:textColor="#ffffff"
+                        android:textSize="13dp"
+                        android:textStyle="normal" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="16dp"
+                        android:src="@drawable/img_more" />
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/name_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/app_jingray"
+                    android:textSize="13dp" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/app_gray3" />
+
+                <EditText
+                    android:id="@+id/email_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@null"
+                    android:hint="email@email.com"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/app_jingray"
+                    android:textColorHint="@color/app_gray3"
+                    android:textSize="13dp" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/app_gray3" />
+
+
+                <EditText
+                    android:id="@+id/phone_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@null"
+                    android:hint="010-0000-0000"
+                    android:imeOptions="actionNext"
+                    android:inputType="phone"
+                    android:textColor="@color/app_jingray"
+                    android:textColorHint="@color/app_gray3"
+                    android:textSize="13dp" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/app_gray3" />
+
+
+                <EditText
+                    android:id="@+id/subject_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@null"
+                    android:hint="제목을 입력하세요."
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/app_jingray"
+                    android:textColorHint="@color/app_gray3"
+                    android:textSize="13dp" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/app_gray3" />
+
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="96dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/gray2_stroke_box"
+                    android:padding="8dp">
+
+
+                    <EditText
+                        android:id="@+id/content_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="top"
+                        android:hint="내용을 입력하세요."
+                        android:imeOptions="actionDone"
+                        android:lines="5"
+                        android:textColor="@color/app_jingray"
+                        android:textColorHint="@color/app_gray3"
+                        android:textSize="13dp" />
+                </ScrollView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="8dp"
+                    android:text="1대1 문의 답변은 입력하신 이메일로 발송됩니다."
+                    android:textColor="@color/app_gray3"
+                    android:textSize="12dp" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="전화로 응답받기를 원합니다."
+                        android:textColor="@color/app_jingray"
+                        android:textSize="12dp" />
+
+
+                    <CheckBox
+                        android:id="@+id/phone_answer_cb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:button="@drawable/checkbox_premium_item" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#ffffff">
+
+            <TextView
+                android:id="@+id/send_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="보내기"
+                android:textColor="@drawable/pressed_3a3a3a"
+                android:textSize="15dp"
+                android:textStyle="italic" />
+
+
+            <TextView
+                android:id="@+id/cancel_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/cancel"
+                android:textColor="@drawable/pressed_a3a3a3"
+                android:textSize="15dp"
+                android:textStyle="italic" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

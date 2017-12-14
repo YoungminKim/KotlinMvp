@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        layout="@layout/include_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <!--<fragment
+        android:id="@+id/main_fg"
+        android:name="com.thejaljal.jaljal.fragment.MainFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />-->
+
+
+    <FrameLayout
+        android:id="@+id/main_fl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"/>
+
+        <LinearLayout
+            android:id="@+id/main_title_ll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_bar_height"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/title_bar_margin_top"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+
+            <TextView
+                android:id="@+id/tab_tv0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/week_recipe"
+                android:textColor="@color/app_jingray"
+                android:textStyle="bold"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/tab_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@string/recipe_calandar"
+                android:textColor="@color/app_gray2"
+                android:textStyle="italic"
+                android:textSize="16dp" />
+
+
+            <TextView
+                android:id="@+id/tab_tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@string/recipe_book"
+                android:textStyle="italic"
+                android:textColor="@color/app_gray2"
+                android:textSize="16dp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+
+            <ImageView
+                android:id="@+id/menu_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:onClick="onClick"
+                android:src="@drawable/btn_menu" />
+
+
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

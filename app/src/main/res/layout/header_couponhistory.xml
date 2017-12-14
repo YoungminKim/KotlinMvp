@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/coupon_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="보유한 초대장이 없습니다."
+        android:textColor="@color/app_jingray"
+        android:textSize="13dp"
+        android:textStyle="italic" />
+
+    <LinearLayout
+        android:id="@+id/input_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/name_et"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:hint="초대장을 보낼 친구의 이름을 입력하세요."
+            android:textColor="@color/app_jingray"
+            android:textColorHint="@color/app_gray3"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/app_gray3" />
+
+
+        <EditText
+            android:id="@+id/email_et"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@null"
+            android:hint="친구의 이메일 주소를 입력하세요."
+            android:inputType="textEmailAddress"
+            android:textColor="@color/app_jingray"
+            android:textColorHint="@color/app_gray3"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/app_gray3" />
+
+        <TextView
+            android:id="@+id/send_tv"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/login_box"
+            android:gravity="center"
+            android:text="보내기"
+            android:textColor="@drawable/pressed_white"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="레시피 선물 내역"
+        android:textColor="@color/app_jingray"
+        android:textSize="14dp"
+        android:textStyle="italic" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/app_gray3" />
+
+
+    <TextView
+        android:id="@+id/no_history_tv"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:gravity="center_vertical"
+        android:text="내역이 없습니다."
+        android:textColor="@color/app_gray3"
+        android:textSize="14dp"
+        android:textStyle="italic"
+        android:visibility="gone"/>
+</LinearLayout>
+

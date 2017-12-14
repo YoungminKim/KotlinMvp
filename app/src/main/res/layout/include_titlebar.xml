@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/titlebar_ll"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/title_bar_height"
+    android:orientation="vertical"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/title_bar_margin_top"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <ImageView
+            android:id="@+id/back_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/btn_back"/>
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/back_iv"
+            android:layout_toLeftOf="@id/menu_iv"
+            android:gravity="center"
+            android:text="@string/week_recipe"
+            android:textColor="@color/app_jingray"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="16dp"
+            android:autoSizeMinTextSize="12dp"
+            android:autoSizeStepGranularity="1dp"
+            android:textSize="16dp"
+            android:textStyle="bold"/>
+
+
+        <ImageView
+            android:id="@+id/menu_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:onClick="showMenu"
+            android:padding="10dp"
+            android:src="@drawable/btn_menu" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

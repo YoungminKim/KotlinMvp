@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="type_of_inquiry">
+        <item>배송문의</item>
+        <item>상품문의</item>
+    </array>
+</resources>
