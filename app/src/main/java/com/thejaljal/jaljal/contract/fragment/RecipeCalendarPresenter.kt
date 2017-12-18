@@ -91,7 +91,7 @@ class RecipeCalendarPresenter(val ctx: Context): AbstractPresenter<RecipeCalenda
                 visible = View.VISIBLE
                 var dateStr = item.deliveryDate
                 if(dateStr == null || dateStr.isEmpty()) dateStr = item.predictDate
-                nextDelivery = DateStrReplace.setDateKorean(dateStr)
+                nextDelivery = DateStrReplace.setDateKorean(dateStr!!)
 
                 break
             }
@@ -121,6 +121,7 @@ class RecipeCalendarPresenter(val ctx: Context): AbstractPresenter<RecipeCalenda
     }
 
     override fun onCheckModifyStatus(position: Int) {
+        clickPosition = position
         adapterModel.getItem(position).let {
             checkModifyStatus(it)
         }
@@ -185,13 +186,25 @@ class RecipeCalendarPresenter(val ctx: Context): AbstractPresenter<RecipeCalenda
 
         data.let {
             if(it.result!!){
-                val intent = Intent(ctx, PremiumItemActivity::class.java)
+
+
                 var list = arrayListOf<RecipeCalendar.CalendarData>()
 
                 adapterModel.list.filter { it.ordrStatus.equals("O") }.map { list.add(it) }
+                var putPosition = 0
+                for(i in 0.. list.size -1){
+                    if(adapterModel.list[clickPosition].ordrSeq == list[i].ordrSeq){
+                        putPosition = i
+                        break;
+                    }
+                }
 
-                intent.putExtra("datas", list)
-                intent.putExtra("position", clickPosition)
+                val intent  = Intent(ctx, PremiumItemActivity::class.java)
+                intent.apply {
+                    putExtra("datas", list)
+                    putExtra("position", putPosition)
+                }
+
 
                 view?.goPremiumIngr(intent)
 

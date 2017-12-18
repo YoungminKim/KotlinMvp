@@ -25,7 +25,7 @@ class PremiumItemAdapter(override val ctx: Context) : CommonAdapter(), PremiumIt
         notifyDataSetChanged()
     }
 
-    override fun onCreateBasicViewHolder(parent: ViewGroup, viewType: Int) = PremiumItemViewHolder(inflater.inflate(R.layout.item_premiumingr, parent,false))
+    override fun onCreateBasicViewHolder(parent: ViewGroup, viewType: Int) = PremiumItemViewHolder(ctx, inflater.inflate(R.layout.item_premiumingr, parent,false))
 
     override fun onBindBasicItemView(holder: RecyclerView.ViewHolder?, position: Int) {
         holder as PremiumItemViewHolder

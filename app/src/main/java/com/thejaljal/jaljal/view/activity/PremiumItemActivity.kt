@@ -37,7 +37,7 @@ class PremiumItemActivity : CommonActivity<PremiumItemContract.View, PremiumItem
             adapterModel = adapter
             getPremiumList()
         }
-
+        rv.adapter = adapter
 
 
     }
