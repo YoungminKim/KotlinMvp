@@ -13,14 +13,22 @@ import test.ym.kotilnpj.http.UrlInfo
  * Created by no.1 on 2017-12-13.
  */
 
-class PremiumItemViewHolder(val ctx: Context, val view: View):RecyclerView.ViewHolder(view){
-    fun onBind(item: PremiumItem.Item){
+class PremiumItemViewHolder(val ctx: Context, val view: View, val isOrder: Boolean, val checkFunc: ((Int, Boolean) -> Unit)?):RecyclerView.ViewHolder(view){
+    fun onBind(item: PremiumItem.Item, position: Int){
 
         view.run {
             Glide.with(ctx)
                     .load(UrlInfo.PREMIUM_ITEM_PATH + item.thmbFile)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(iv)
+
+            if(!isOrder){
+                cb.setOnClickListener({
+                    checkFunc?.invoke(position, cb.isChecked)
+                })
+            }else{
+                cb.visibility = View.GONE
+            }
         }
 
     }

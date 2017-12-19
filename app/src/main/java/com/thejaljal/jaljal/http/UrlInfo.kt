@@ -33,6 +33,7 @@ object UrlInfo{
         const val CHECK_MODIFY_STATUS = "checkModifyStatus"
         const val SET_DELIVERY_STATUS = "setDeliveryStatus"
         const val PREMIUM_ITEMS = "premiumItems"
+        const val CANCEL_PREMIUM_ITEMS = "cancelPremiumItems"
 
 
 

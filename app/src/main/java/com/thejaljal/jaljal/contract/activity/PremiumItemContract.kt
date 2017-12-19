@@ -14,23 +14,25 @@ import com.thejaljal.jaljal.model.PremiumItem
 interface PremiumItemContract {
     interface View: BaseView{
         fun setIsOrderView(isOrder: Boolean)
+        fun orderCancle()
+        fun goOrderPage(intent: Intent)
     }
 
     interface Presenter: BasePresenter<View>{
-        var adapterView: PremiumItemAdapterContract.View
-        var adapterModel: PremiumItemAdapterContract.Model
 
+        fun adapterView(view: PremiumItemAdapterContract.View)
+        fun adapterModel(model: PremiumItemAdapterContract.Model)
         fun setExtra(intent: Intent)
 
         fun getPremiumList()
         fun cancelPremiumItem()
         fun checkModifyStatus()
-
+        fun checkItemList()
 
         fun premiumListResponse(data: PremiumItem)
         fun handleError(error: Throwable)
 
-
+        fun checkStatusResponse(response: Common)
         fun cancelItemResponse(data: Common)
     }
 }

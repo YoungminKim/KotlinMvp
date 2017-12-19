@@ -10,9 +10,15 @@ import com.thejaljal.jaljal.model.PremiumItem
 interface PremiumItemAdapterContract {
     interface View: BaseView{
         fun notifyAdapter()
+
     }
 
     interface Model{
+        var IsOrder: Boolean
+        var checkFunc: ((Int, Boolean) -> Unit)?
+        val isChecks: BooleanArray
+        fun getCheckItemList(): ArrayList<PremiumItem.Item>?
+        fun checkItem(position: Int, isCheck: Boolean)
         fun addData(data: ArrayList<PremiumItem.Item>)
     }
 }

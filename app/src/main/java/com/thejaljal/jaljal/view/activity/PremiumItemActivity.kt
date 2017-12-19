@@ -1,13 +1,12 @@
 package com.thejaljal.jaljal.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import com.thejaljal.jaljal.R
 import com.thejaljal.jaljal.contract.activity.PremiumItemContract
 import com.thejaljal.jaljal.contract.activity.PremiumItemPresenter
-import com.thejaljal.jaljal.model.RecipeCalendar
 import com.thejaljal.jaljal.view.adapter.PremiumItemAdapter
 import kotlinx.android.synthetic.main.activity_premiumlist.*
-import test.ym.kotilnpj.utils.DebugUtils
 
 /**
  * Created by no.1 on 2017-12-11.
@@ -15,11 +14,9 @@ import test.ym.kotilnpj.utils.DebugUtils
 
 class PremiumItemActivity : CommonActivity<PremiumItemContract.View, PremiumItemPresenter>(), PremiumItemContract.View{
 
-
     val TAG = javaClass.simpleName
 
     var isOrder: Boolean = false
-
 
 
     override fun onCreatePresenter() = PremiumItemPresenter(this)
@@ -39,7 +36,6 @@ class PremiumItemActivity : CommonActivity<PremiumItemContract.View, PremiumItem
         }
         rv.adapter = adapter
 
-
     }
 
 
@@ -52,10 +48,18 @@ class PremiumItemActivity : CommonActivity<PremiumItemContract.View, PremiumItem
                 if(isOrder){
                     presenter?.checkModifyStatus()
                 }else{
-
+                    presenter?.checkItemList()
                 }
             }
         }
+    }
+
+    override fun goOrderPage(intent: Intent) {
+        setToast("goOrderPage called!!!")
+    }
+
+    override fun orderCancle() {
+        finish()
     }
 
 }
