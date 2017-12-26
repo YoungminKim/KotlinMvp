@@ -7,6 +7,7 @@ import com.thejaljal.jaljal.contract.dialog.StringDialogContract
 import com.thejaljal.jaljal.contract.dialog.StringDialogPresenter
 import com.thejaljal.jaljal.view.adapter.StringDialogAdapter
 import kotlinx.android.synthetic.main.dialog_list.*
+import kotlinx.android.synthetic.main.fragment_recipe_book.*
 import test.ym.kotilnpj.utils.DebugUtils
 
 /**
@@ -18,7 +19,7 @@ class StringDialog(val ctx: Context, val list: ArrayList<String>? = null, strs: 
 
 
     interface SelectListner{
-        fun selectListner(str: String)
+        fun selectListner(position: Int, str: String)
     }
 
     var mListner: SelectListner? = null
@@ -26,8 +27,8 @@ class StringDialog(val ctx: Context, val list: ArrayList<String>? = null, strs: 
 
     var mList = arrayListOf<String>()
 
-    constructor(ctx: Context, list: ArrayList<String>): this(ctx, list, null){
-        mList = list
+    constructor(ctx: Context, list: ArrayList<String>?): this(ctx, list, null){
+        mList = list!!
     }
     constructor(ctx: Context, strs: Array<String>): this(ctx, null, strs){
 
@@ -47,24 +48,22 @@ class StringDialog(val ctx: Context, val list: ArrayList<String>? = null, strs: 
         DebugUtils.setLog(TAG, "size : " + mList.size)
         out_layer.setOnClickListener({ dismiss() })
         val adapter = StringDialogAdapter(context)
-        presenter?.setDialogAdapterModel(adapter)
-        presenter?.setDialogAdapterView(adapter)
-        presenter?.setList(mList)
+        presenter?.run {
+            setDialogAdapterModel(adapter)
+            setDialogAdapterView(adapter)
+            setList(mList)
+        }
         lv.adapter = adapter
 
     }
 
 
-    override fun selectStr(str: String) {
-        mListner?.selectListner(str)
+    override fun selectStr(position: Int, str: String) {
+        mListner?.selectListner(position, str)
         dismiss()
     }
 
-    open fun setOnItemClick(listner: SelectListner){
+    fun setOnItemClick(listner: SelectListner){
         mListner = listner
     }
-
-
 }
-
-

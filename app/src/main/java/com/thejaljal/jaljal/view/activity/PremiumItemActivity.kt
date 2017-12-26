@@ -55,7 +55,7 @@ class PremiumItemActivity : CommonActivity<PremiumItemContract.View, PremiumItem
     }
 
     override fun goOrderPage(intent: Intent) {
-        setToast("goOrderPage called!!!")
+        startActivity(intent)
     }
 
     override fun orderCancle() {

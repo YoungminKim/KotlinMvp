@@ -10,7 +10,7 @@ import com.thejaljal.jaljal.contract.adapter.StringDialogApdaterContract
 
 interface StringDialogContract{
     interface View: BaseView {
-        fun selectStr(str: String)
+        fun selectStr(position: Int, str: String)
     }
 
 

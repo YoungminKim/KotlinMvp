@@ -37,7 +37,7 @@ class StringDialogPresenter: AbstractPresenter<StringDialogContract.View>(), Str
         DebugUtils.setLog(TAG, "position : " + position)
 
         adapterModel.getItem(position).let {
-            view?.selectStr(it)
+            view?.selectStr(position, it)
         }
     }
 

@@ -68,7 +68,10 @@ interface HttpService{
     @GET(UrlInfo.CANCEL_PREMIUM_ITEMS)
     fun cancelPremiumItem(@QueryMap params: java.util.HashMap<String, Any>): Observable<Common>
 
+    @GET(UrlInfo.PREMIUM_DATES)
+    fun getPremiumDates(@QueryMap params: java.util.HashMap<String, Any>): Observable<PremiumDate>
 
-
+    @GET(UrlInfo.ORDER_PREMIUM_ITEMS)
+    fun orderPremiumItems(@QueryMap params: java.util.HashMap<String, Any>): Observable<OrderPremiumItem>
 
 }

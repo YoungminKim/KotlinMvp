@@ -34,8 +34,14 @@ object UrlInfo{
         const val SET_DELIVERY_STATUS = "setDeliveryStatus"
         const val PREMIUM_ITEMS = "premiumItems"
         const val CANCEL_PREMIUM_ITEMS = "cancelPremiumItems"
-
-
+        const val ORDER_PREMIUM_ITEMS = "orderPremiumItems"
+        const val PREMIUM_DATES = "premiumDates"
+        const val DELIVERY_DATES = "deliveryDates"
+        const val MESSAGE_LIST = "message"
+        const val COUPON_HISTORY = "freeCouponLog"
+        const val COUPON_CNT = "freeCouponCnt"
+        const val SEND_COUPON = "sendFreeConpon"
+        const val SET_DELIVERY_DATE = "setDeliveryDate"
 
 
         const val IMAGE_HEARDER = "http://image.thejaljal.com/"

@@ -46,7 +46,7 @@ class RecipeBookFragment: CommonFragment<RecipeBookContract.View, RecipeBookCont
     override fun showDialog(isStyle: Boolean, list: ArrayList<String>) {
         val dialog = StringDialog(context, list)
         dialog.setOnItemClick(object: StringDialog.SelectListner{
-                    override fun selectListner(str: String) {
+                    override fun selectListner(position: Int, str: String) {
                         if(isStyle)view?.style_tv?.text = str
                         else view?.ingr_tv?.text = str
                     }

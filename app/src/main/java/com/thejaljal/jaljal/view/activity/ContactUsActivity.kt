@@ -47,7 +47,7 @@ class ContactUsActivity: CommonActivity<ContactUsContract.View, ContactUsPresent
 
                 val dialog = StringDialog(this,inquirys)
                 dialog.setOnItemClick(object : StringDialog.SelectListner{
-                    override fun selectListner(str: String) {
+                    override fun selectListner(position: Int, str: String) {
                             inquiry_tv.text = str
                     }
                 })
