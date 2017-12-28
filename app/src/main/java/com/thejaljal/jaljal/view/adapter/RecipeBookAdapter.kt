@@ -16,7 +16,7 @@ class RecipeBookAdapter(override val ctx: Context) : CommonAdapter(), RecipeBook
 
 
 
-    lateinit var list: ArrayList<Recipe.Data>
+    override val list: ArrayList<Recipe.Data> = arrayListOf()
 
     override fun onCreateBasicViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = RecipeBookViewHolder(ctx, inflater.inflate(R.layout.item_recipe_book, parent, false))
 
@@ -29,8 +29,9 @@ class RecipeBookAdapter(override val ctx: Context) : CommonAdapter(), RecipeBook
     }
 
 
-    override fun addList(list: ArrayList<Recipe.Data>) {
-        this.list = list
+    override fun addList(page:Int, data: ArrayList<Recipe.Data>) {
+        if(page == 1)list.clear()
+        list.addAll(data)
         setBasicItemCount(list.size)
     }
 

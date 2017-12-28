@@ -13,6 +13,7 @@ interface FaqAdapterContract{
     }
 
     interface Model{
+        val list: ArrayList<Faq.Board>
         fun addData(data: ArrayList<Faq.Board>)
     }
 }

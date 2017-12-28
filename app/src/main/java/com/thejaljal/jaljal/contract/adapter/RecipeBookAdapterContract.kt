@@ -14,6 +14,7 @@ interface RecipeBookAdapterContract{
 
 
     interface Model{
-        fun addList(list: ArrayList<Recipe.Data>)
+        val list:ArrayList<Recipe.Data>
+        fun addList(page:Int, list: ArrayList<Recipe.Data>)
     }
 }

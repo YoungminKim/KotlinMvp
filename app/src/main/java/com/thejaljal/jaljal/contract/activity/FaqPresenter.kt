@@ -23,16 +23,25 @@ class FaqPresenter(val ctx: Context): AbstractPresenter<FaqContract.View>(), Faq
 
     var mCompositeDisposable: CompositeDisposable? = null
 
-    override fun getFaqList() {
-        val params = hashMapOf<String, Any>()
-        params.put("accessKey", PreferencesManager(ctx).getAccessKey())
-        params.put("nowPage", 0)
-        params.put("pagingUnit", AppConst.PAGING_UNIT)
-        if(mCompositeDisposable == null) mCompositeDisposable = CompositeDisposable()
-        mCompositeDisposable?.add(HttpsManager.service.faqList(params)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::handlerResponse, this::handleError))
+    var lastPage = false
+
+
+    override fun getFaqList(page: Int) {
+        DebugUtils.setLog(TAG , "page : " + page)
+
+        if(!lastPage){
+
+            val params = hashMapOf<String, Any>()
+            params.put("accessKey", PreferencesManager(ctx).getAccessKey())
+            params.put("nowPage", page)
+            params.put("pagingUnit", AppConst.PAGING_UNIT)
+            if(mCompositeDisposable == null) mCompositeDisposable = CompositeDisposable()
+            mCompositeDisposable?.add(HttpsManager.service.faqList(params)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(this::handlerResponse, this::handleError))
+        }
+
 
     }
 
@@ -44,15 +53,24 @@ class FaqPresenter(val ctx: Context): AbstractPresenter<FaqContract.View>(), Faq
         adapterModel = model
     }
 
-    override fun handlerResponse(data: Any) {
-        val result = data as Faq
-        DebugUtils.setLog(TAG, "data : " + result)
-        result.let {
-            if(it.result!!){
-                adapterModel.addData(it.data?.faqList!!)
-                adapterView.notifyAdapter()
+    override fun handlerResponse(response: Faq) {
+        response.run {
+            if(result!!){
+                data?.faqList?.run {
+                    if(size < AppConst.PAGING_UNIT){
+                        lastPage = true
+                    }
+
+                    if(adapterModel.list.size > 0 && get(size - 1).boardSeq == adapterModel.list[adapterModel.list.size - 1].boardSeq){
+                        lastPage = true
+                        return@run
+                    }
+                    adapterModel.addData(data?.faqList)
+                    adapterView.notifyAdapter()
+                }
+
             }else{
-                view?.setToast(it.message!!)
+                view?.setToast(message!!)
             }
         }
     }

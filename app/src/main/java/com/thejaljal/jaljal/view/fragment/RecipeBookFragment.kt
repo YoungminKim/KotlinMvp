@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.thejaljal.jaljal.R
 import com.thejaljal.jaljal.contract.fragment.RecipeBookContract
 import com.thejaljal.jaljal.contract.fragment.RecipeBookPresenter
+import com.thejaljal.jaljal.listner.EndlessRecyclerOnScrollListener
 import com.thejaljal.jaljal.listner.OnItemClickListner
 import com.thejaljal.jaljal.view.adapter.RecipeBookAdapter
 import com.thejaljal.jaljal.view.dialog.StringDialog
@@ -22,22 +23,39 @@ class RecipeBookFragment: CommonFragment<RecipeBookContract.View, RecipeBookCont
 
     val TAG = javaClass.simpleName
 
-
+    var selectIngr = ""
+    var selectStyle = 1
 
     override fun onCreatePresenter(): RecipeBookContract.Presenter? = RecipeBookPresenter(context)
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater?.inflate(R.layout.fragment_recipe_book, container, false) as View
-        val adapter = RecipeBookAdapter(context)
-        v.rv.adapter = adapter
-        with(presenter){
-            this?.setRecipeBookAdapterModel(adapter)
-            this?.setRecipeBookAdapterView(adapter)
-            this?.getRecipeBook()
+
+        v?.run {
+            val adapter = RecipeBookAdapter(context)
+            rv.adapter = adapter
+            presenter?.run {
+                setRecipeBookAdapterModel(adapter)
+                setRecipeBookAdapterView(adapter)
+                getRecipeBook()
+
+
+                main_ingr_rl.setOnClickListener({ getMainIngrList() })
+                style_rl.setOnClickListener({getProgramList()})
+
+
+                rv.addOnScrollListener(object :EndlessRecyclerOnScrollListener(){
+                    override fun onLoadMore(currentPage: Int) {
+                        DebugUtils.setLog(TAG, "currentPage : " + currentPage)
+                        getRecipeBook(currentPage)
+                    }
+
+                })
+            }
+
+
         }
 
-        v.main_ingr_rl.setOnClickListener({ presenter?.getMainIngrList() })
-        v.style_rl.setOnClickListener({presenter?.getProgramList()})
 
         return v
     }
@@ -47,8 +65,15 @@ class RecipeBookFragment: CommonFragment<RecipeBookContract.View, RecipeBookCont
         val dialog = StringDialog(context, list)
         dialog.setOnItemClick(object: StringDialog.SelectListner{
                     override fun selectListner(position: Int, str: String) {
-                        if(isStyle)view?.style_tv?.text = str
-                        else view?.ingr_tv?.text = str
+                        if(isStyle){
+                            selectStyle = position +1
+                            view?.style_tv?.text = str
+                        }else{
+                            selectIngr = str
+                            view?.ingr_tv?.text = selectIngr
+                        }
+
+                        presenter?.getRecipeBook(1, selectIngr , selectStyle)
                     }
 
                 })

@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_faq.view.*
 
 class FaqAdapter(override val ctx: Context) : CommonAdapter(), FaqAdapterContract.View, FaqAdapterContract.Model{
     private val TAG = javaClass.simpleName
-    lateinit var list: ArrayList<Faq.Board>
+    override val list: ArrayList<Faq.Board> = arrayListOf()
 
     override fun onCreateBasicViewHolder(parent: ViewGroup, viewType: Int) = FaqViewHolder(ctx, inflater.inflate(R.layout.item_faq, parent, false))
 
@@ -31,7 +31,9 @@ class FaqAdapter(override val ctx: Context) : CommonAdapter(), FaqAdapterContrac
     }
 
     override fun addData(data: ArrayList<Faq.Board>) {
-        list = data
+
+        list.addAll(data)
+
         setBasicItemCount(list.size)
     }
 

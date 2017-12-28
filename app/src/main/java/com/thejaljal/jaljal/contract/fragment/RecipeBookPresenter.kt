@@ -23,14 +23,18 @@ import java.util.HashMap
 class RecipeBookPresenter(val ctx: Context): AbstractPresenter<RecipeBookContract.View>(), RecipeBookContract.Presenter{
 
 
+
     private val TAG = javaClass.simpleName
 
     lateinit var adapterModel: RecipeBookAdapterContract.Model
     lateinit var adapterView: RecipeBookAdapterContract.View
 
-    var nowPage = 1
     var searchIngr = ""
     var searchStyle = 1
+
+    var page = 0
+    var lastPage = false
+
 
     var mCompositeDisposable: CompositeDisposable? = null
 
@@ -42,27 +46,51 @@ class RecipeBookPresenter(val ctx: Context): AbstractPresenter<RecipeBookContrac
         adapterView = view
     }
 
-    override fun getRecipeBook() {
-        val params = HashMap<String, Any>()
-        params.put("accessKey", PreferencesManager(ctx).getAccessKey())
-        params.put("nowPage", nowPage)
-        params.put("pagingUnit", AppConst.PAGING_UNIT)
-        params.put("searchValue2", searchIngr)
-        params.put("prgrSeq", searchStyle)
+    override fun getRecipeBook(page: Int, ingr: String, style: Int) {
 
-        if(mCompositeDisposable == null) mCompositeDisposable = CompositeDisposable()
-        mCompositeDisposable?.add(HttpsManager.service.recipeBook(params)
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(this::bookListResponse, this::handleError))
+        searchIngr = ingr
+        searchStyle = style
+
+        DebugUtils.setLog(TAG, "ingr : $ingr, style: $style")
+        this.page = page
+        if(page == 1) lastPage = false
+
+        if(!lastPage){
+            val params = HashMap<String, Any>()
+            params.put("accessKey", PreferencesManager(ctx).getAccessKey())
+            params.put("nowPage", page)
+            params.put("pagingUnit", AppConst.PAGING_UNIT)
+            params.put("searchValue2", searchIngr)
+            params.put("prgrSeq", searchStyle)
+
+            if(mCompositeDisposable == null) mCompositeDisposable = CompositeDisposable()
+            mCompositeDisposable?.add(HttpsManager.service.recipeBook(params)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(this::bookListResponse, this::handleError))
+        }
+
     }
 
-    override fun bookListResponse(data: Any) {
-        val result = data as RecipeBook
-        result.let {
-            if(result.result!!){
-                adapterModel.addList(result.data!!.recipeList)
-                adapterView.notifyAdapter()
+    override fun bookListResponse(response: RecipeBook) {
+
+        response.run {
+            if(result!!){
+                data?.recipeList?.run {
+
+                    if(size < AppConst.PAGING_UNIT){
+                        lastPage = true
+                    }
+
+                    if(page > 1 && adapterModel.list.size > 0 && get(size -1).rcipSeq == adapterModel.list[adapterModel.list.size - 1].rcipSeq){
+                        lastPage = true
+                        return@run
+                    }
+
+                    adapterModel.addList(page, data?.recipeList)
+                    adapterView.notifyAdapter()
+                }
+
             }
 
         }

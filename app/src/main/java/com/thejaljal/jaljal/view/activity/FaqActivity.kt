@@ -6,6 +6,7 @@ import android.view.View
 import com.thejaljal.jaljal.R
 import com.thejaljal.jaljal.contract.activity.FaqContract
 import com.thejaljal.jaljal.contract.activity.FaqPresenter
+import com.thejaljal.jaljal.listner.EndlessRecyclerOnScrollListener
 import com.thejaljal.jaljal.view.adapter.FaqAdapter
 import kotlinx.android.synthetic.main.activity_faq.*
 
@@ -22,15 +23,18 @@ class FaqActivity: CommonActivity<FaqContract.View, FaqPresenter>(), FaqContract
 
         val adapter = FaqAdapter(this)
         rv.adapter = adapter
+        rv.addOnScrollListener(object : EndlessRecyclerOnScrollListener(){
+            override fun onLoadMore(currentPage: Int) {
+                presenter?.getFaqList(currentPage)
+            }
+
+        })
 
         presenter?.run{
             getFaqList()
             setFaqAdapterModel(adapter)
             setFaqAdapterView(adapter)
         }
-
-
-
 
     }
 
