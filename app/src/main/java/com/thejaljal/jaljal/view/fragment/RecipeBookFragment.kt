@@ -52,8 +52,6 @@ class RecipeBookFragment: CommonFragment<RecipeBookContract.View, RecipeBookCont
 
                 })
             }
-
-
         }
 
 
