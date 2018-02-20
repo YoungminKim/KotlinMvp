@@ -7,10 +7,11 @@ import android.os.Handler
 import android.os.Message
 import com.thejaljal.jaljal.AppConst
 import com.thejaljal.jaljal.HandlerCode
-import com.thejaljal.jaljal.R
 import com.thejaljal.jaljal.contract.activity.SplashContract
 import com.thejaljal.jaljal.contract.activity.SplashPresent
 import com.thejaljal.jaljal.view.dialog.DialogView
+import com.thejaljal.jaljal.view.activity.ui.SplashUI
+import org.jetbrains.anko.setContentView
 import test.ym.kotilnpj.manager.PreferencesManager
 
 /**
@@ -20,6 +21,8 @@ import test.ym.kotilnpj.manager.PreferencesManager
 
 class SplashActivity : CommonActivity<SplashContract.View, SplashPresent>(), SplashContract.View {
 
+
+
     private val CLOSE_TIME = 1 * 1000
 
 
@@ -28,11 +31,10 @@ class SplashActivity : CommonActivity<SplashContract.View, SplashPresent>(), Spl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
-
-        with(presenter){
-            this?.setContext(this@SplashActivity)
-            this?.checkService()
+        SplashUI().setContentView(this)
+        presenter?.run {
+            setContext(this@SplashActivity)
+            checkService()
         }
     }
 

@@ -8,7 +8,6 @@ import com.thejaljal.jaljal.R
 import com.thejaljal.jaljal.contract.fragment.RecipeBookContract
 import com.thejaljal.jaljal.contract.fragment.RecipeBookPresenter
 import com.thejaljal.jaljal.listner.EndlessRecyclerOnScrollListener
-import com.thejaljal.jaljal.listner.OnItemClickListner
 import com.thejaljal.jaljal.view.adapter.RecipeBookAdapter
 import com.thejaljal.jaljal.view.dialog.StringDialog
 import kotlinx.android.synthetic.main.fragment_recipe_book.view.*
